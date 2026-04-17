@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Cat Summoner",
+  "name": "Cat Extension - 画面に現れるリラックス猫",
   "version": "1.0.0",
   "description": "ブラウザ画面に透過した猫の動画をランダムに出現させます。",
   "permissions": [

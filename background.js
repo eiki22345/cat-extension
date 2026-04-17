@@ -1,6 +1,10 @@
 // background.js (Manifest V3 Service Worker)
 // タイマー（chrome.alarms）、ショートカット、アクションクリックで猫を召喚する。
 
+importScripts('ExtPay.js');
+const extpay = ExtPay('cat-extension---');
+extpay.startBackground();
+
 const ALARM_NAME = "cat-summon-alarm";
 
 const DEFAULTS = {
@@ -64,6 +68,19 @@ function isAccessibleUrl(url) {
 }
 
 function summonInActiveTab() {
+  const ep = ExtPay('cat-extension---');
+  ep.getUser().then(user => {
+    if (!user.paid) {
+      ep.openPaymentPage();
+      return;
+    }
+    doSummon();
+  }).catch(() => {
+    doSummon(); // ネットワーク失敗時は通す
+  });
+}
+
+function doSummon() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
     if (!tab || !tab.id) {

@@ -25,13 +25,23 @@
       ],
       "run_at": "document_idle",
       "all_frames": false
+    },
+    {
+      "matches": [
+        "https://extensionpay.com/*"
+      ],
+      "js": [
+        "ExtPay.js"
+      ],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
         "cat-*.mp4",
-        "videos/*"
+        "videos/*",
+        "ExtPay.js"
       ],
       "matches": [
         "<all_urls>"

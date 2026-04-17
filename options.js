@@ -1,6 +1,8 @@
 // options.js
 // 設定を chrome.storage.sync に保存・復元する。
 
+const extpay = ExtPay('cat-extension---');
+
 const DEFAULTS = {
   soundEnabled: true,
   volume: 1.0,
@@ -45,5 +47,32 @@ document.addEventListener("DOMContentLoaded", () => {
   $("volume").addEventListener("input", (e) => {
     $("volumeLabel").textContent =
       Math.round(parseFloat(e.target.value) * 100) + "%";
+  });
+
+  // 課金状態チェック
+  extpay.getUser().then(user => {
+    const statusEl = $("paymentStatus");
+    const payBtn = $("payBtn");
+    const manageBtn = $("manageBtn");
+
+    if (user.paid) {
+      statusEl.textContent = "✅ 購入済み";
+      statusEl.style.color = "#0a0";
+      manageBtn.style.display = "inline-block";
+    } else {
+      statusEl.textContent = "❌ 未購入（猫を召喚するには購入が必要です）";
+      statusEl.style.color = "#c00";
+      payBtn.style.display = "inline-block";
+    }
+  }).catch(() => {
+    $("paymentStatus").textContent = "⚠ 状態を確認できませんでした";
+  });
+
+  $("payBtn").addEventListener("click", () => {
+    extpay.openPaymentPage();
+  });
+
+  $("manageBtn").addEventListener("click", () => {
+    extpay.openPaymentPage();
   });
 });

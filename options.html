@@ -60,6 +60,15 @@
 
 <body>
   <h1>Cat Summoner 設定</h1>
+
+  <div id="paymentSection" style="margin-bottom: 20px; padding: 12px; border: 1px solid #ddd; border-radius: 8px;">
+    <p id="paymentStatus" style="font-size: 14px; margin: 0 0 8px;">購入状態を確認中…</p>
+    <button id="payBtn"
+      style="display:none; padding: 8px 16px; font-size: 14px; cursor: pointer; background: #4CAF50; color: #fff; border: none; border-radius: 4px;">購入（¥390
+      買い切り）</button>
+    <button id="manageBtn" style="display:none; padding: 8px 16px; font-size: 14px; cursor: pointer;">購入情報を管理</button>
+  </div>
+
   <p class="hint">ショートカット: <b>Ctrl+Shift+H</b>（Mac: <b>Cmd+Shift+H</b>）で即召喚</p>
 
   <div class="row">
@@ -88,6 +97,7 @@
     <span id="status"></span>
   </div>
 
+  <script src="ExtPay.js"></script>
   <script src="options.js"></script>
 </body>
 

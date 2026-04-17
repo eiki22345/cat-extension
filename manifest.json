@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Cat Summoner",
+  "version": "1.0.0",
+  "description": "ブラウザ画面に透過した猫の動画をランダムに出現させます。",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "cat-*.mp4",
+        "videos/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "猫を召喚"
+  },
+  "commands": {
+    "summon-cat": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "猫を即座に召喚する"
+    }
+  },
+  "icons": {}
+}
